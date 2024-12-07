@@ -1,28 +1,27 @@
 # BeautyBooking
 
-A beauty bookings web application for hair, nails, spa etc. appointments.  :calendar: :nail_care:
+تطبيق ويب لحجز مواعيد العناية بالجمال للشعر والأظافر والسبا وما إلى ذلك. :calendar: :nail_care:
 
-:dart:  My project for the ASP.NET Core course at SoftUni. (April 2024) 
+:dart: مشروعي لدورة ASP.NET Core في SoftUni. (أبريل 2023)
 
-## :information_source: How It Works
+## :information_source: كيف يعمل
 
-- Guest visitors: 
-  - browse categories of beauty services;
-  - view salons with their services;
-  - read blog posts.
-- Logged Users:
-  - book appointments using interactive datepicker; 
-  - can cancel appointments; 
-  - can rate salons for which they had confirmed past appointments.  
-- Salon Manager (user role):
-  - confirms/declines users' appointments for particular salon; 
-  - controls what services are available for booking in the salon.
-- Admin:
-  - creates/deletes blog posts, categories, salons and services; 
-  - can review the appointments history.
+- الزوار الضيوف:
+- تصفح فئات خدمات التجميل؛
+- عرض الصالونات مع خدماتها؛
+- قراءة منشورات المدونة.
+- المستخدمون المسجلون:
+- حجز المواعيد باستخدام أداة تحديد التاريخ التفاعلية؛
+- يمكنهم إلغاء المواعيد؛
+- يمكنهم تقييم الصالونات التي أكدوا مواعيدهم السابقة فيها.
+- مدير الصالون (دور المستخدم):
+- يؤكد/يرفض مواعيد المستخدمين لصالون معين؛
+- يتحكم في الخدمات المتاحة للحجز في الصالون.
+- المسؤول:
+- ينشئ/يحذف منشورات المدونة والفئات والصالونات والخدمات؛
+- يمكنه مراجعة سجل المواعيد.
 
-## :hammer_and_pick: Built With
-
+## :hammer_and_pick: تم إنشاؤه باستخدام
 - ASP.NET Core 3.1
 - Entity Framework (EF) Core 3.1
 - Microsoft SQL Server Express
@@ -44,58 +43,48 @@ A beauty bookings web application for hair, nails, spa etc. appointments.  :cale
 - Bootstrap
 - jQuery
 
-## :gear: Application Configurations
+## :gear: تكوينات التطبيق
 
-### 1. The Connection string 
-is in `appsettings.json`. If you don't use SQLEXPRESS, you should replace `Server=.\\SQLEXPRESS;` with `Server=.;`
+### 1. سلسلة الاتصال
+توجد في `appsettings.json`. إذا كنت لا تستخدم SQLEXPRESS، فيجب استبدال `Server=.\\SQLEXPRESS;` بـ `Server=.;`
 
-### 2. Database Migrations 
-would be applied when you run the application, since the `ASPNETCORE-ENVIRONMENT` is set to `Development`. If you change it, you should apply the migrations yourself.
+### 2. عمليات نقل قاعدة البيانات
+ستُطبق عند تشغيل التطبيق، نظرًا لأن `ASPNETCORE-ENVIRONMENT` مضبوط على `Development`. إذا قمت بتغييره، فيجب عليك تطبيق عمليات النقل بنفسك.
 
-### 3. Seeding sample data
-would happen once you run the application, including Test Accounts:
-  - User: user@user.com / password: 123456
-  - Salon Manager: manager@manager.com / password: 123456
-  - Admin: admin@admin.com / password: 123456
- 
-### 4. Cloudinary Setup - optionally
-#### Running without it:
-You won't get an error for missing Cloudinary Credentials - it is handled by using predefined (already uploaded) image, when Cloudinary configuration is missing. So when you are creating content in admin panel, it will be added but not with the image you have chosen.
-#### If you want to actually upload images, you should:
-1. Add Cloudinary Credentials in `appsettings.json` in the format:
+### 3. سيتم نشر بيانات العينة
+بمجرد تشغيل التطبيق، بما في ذلك حسابات الاختبار:
+- المستخدم: user@user.com / كلمة المرور: 123456
+- مدير الصالون: manager@manager.com / كلمة المرور: 123456
+- المسؤول: admin@admin.com / كلمة المرور: 123456
+
+### 4. إعداد Cloudinary - اختياريًا
+#### التشغيل بدونه:
+لن تحصل على خطأ بسبب فقدان بيانات اعتماد Cloudinary - يتم التعامل مع ذلك باستخدام صورة محددة مسبقًا (تم تحميلها بالفعل)، عندما يكون تكوين Cloudinary مفقودًا. لذا عند إنشاء محتوى في لوحة المسؤول، سيتم إضافته ولكن ليس بالصورة التي اخترتها.
+#### إذا كنت تريد تحميل الصور فعليًا، فيجب عليك:
+1. إضافة بيانات اعتماد Cloudinary في `appsettings.json` بالتنسيق:
 ```json
-  "Cloudinary": {
-    "CloudName": "",
-    "ApiKey": "",
-    "ApiSecret": "",
-    "EnvironmentVariable": ""
-  }
+"Cloudinary": {
+"CloudName": "",
+"ApiKey": "",
+"ApiSecret": "",
+"EnvironmentVariable": ""
+}
 ```
-2. Update the Cloudinary Setup part of `Startup.cs`'s `ConfigureServices` method as follows:
+2. تحديث جزء إعداد Cloudinary من طريقة `ConfigureServices` في `Startup.cs` على النحو التالي:
 ```csharp
-            // Cloudinary Setup
-            Cloudinary cloudinary = new Cloudinary(new Account(
-                this.configuration["Cloudinary:CloudName"],
-                this.configuration["Cloudinary:ApiKey"],
-                this.configuration["Cloudinary:ApiSecret"]));
-            services.AddSingleton(cloudinary);
+// إعداد Cloudinary
+Cloudinary cloudinary = new Cloudinary(new Account(
+this.configuration["Cloudinary:CloudName"],
+this.configuration["Cloudinary:ApiKey"],
+this.configuration["Cloudinary:ApiSecret"]));
+services.AddSingleton(cloudinary);
 ```
-
-## :framed_picture: Screenshot - Home Page
-
-![BeautyBooking-HomePage](https://res.cloudinary.com/beauty-booking/image/upload/v1588865868/SCREENSHOTS/1-home_orn9ng.png)
-
-## :framed_picture: Screenshot - Make An Appointment Page
-
-![BeautyBooking-MakeAnAppointment](https://res.cloudinary.com/beauty-booking/image/upload/v1588865868/SCREENSHOTS/4-make-an-appointment_zclidt.png)
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-#### Using [ASP.NET-MVC-Template](https://github.com/NikolayIT/ASP.NET-MVC-Template) developed by:
-- [Nikolay Kostov](https://github.com/NikolayIT)
-- [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
-- [Stoyan Shopov](https://github.com/StoyanShopov)
+#### Using [ASP.NET-MVC-Template](https://github.com/F-BAJBYR/ASP.NET-MVC-Template) developed by:
+- [Fatimah Bajbyr](https://github.com/F-BAJBYR)
+
