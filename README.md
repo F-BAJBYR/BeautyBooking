@@ -2,7 +2,7 @@
 
 تطبيق ويب لحجز مواعيد العناية بالجمال للشعر والأظافر والسبا وما إلى ذلك. :calendar: :nail_care:
 
-:dart: مشروعي لدورة ASP.NET Core في SoftUni. (أبريل 2023)
+:dart: مشروعي لدورة ASP.NET Core . (أبريل 2024)
 
 ## :information_source: كيف يعمل
 
